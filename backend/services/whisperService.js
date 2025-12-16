@@ -24,7 +24,7 @@ const MAX_AUDIO_DURATION_SECONDS = 4;
  * Maximum base64 audio size (approximately 4 seconds of 16kHz WAV)
  * 16kHz * 2 bytes * 4 seconds * 1.37 (base64 overhead) ≈ 175KB
  */
-const MAX_AUDIO_SIZE_BYTES = 200 * 1024; // 200KB limit
+const MAX_AUDIO_SIZE_BYTES = 2 * 1024 * 1024; // 2MB limit
 
 /**
  * Transcribe audio to text using Groq's Whisper
