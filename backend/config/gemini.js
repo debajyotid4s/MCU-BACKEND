@@ -61,10 +61,10 @@ function initializeGemini() {
   // Initialize the Google Generative AI client
   genAI = new GoogleGenerativeAI(apiKey);
 
-  // Get the Gemini Pro model (best for text generation)
-  // Using gemini-1.5-flash for faster responses and lower latency
+  // Get the Gemini model
+  // Using gemini-2.0-flash (latest fast model)
   model = genAI.getGenerativeModel({
-    model: 'gemini-1.5-flash',
+    model: 'gemini-2.0-flash',
     generationConfig,
     systemInstruction,
   });
