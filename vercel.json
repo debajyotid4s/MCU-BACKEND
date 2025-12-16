@@ -9,20 +9,18 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/query",
-      "dest": "/backend/api/query.js",
-      "methods": ["POST", "OPTIONS"]
+      "source": "/api/query",
+      "destination": "/backend/api/query.js"
     },
     {
-      "src": "/api/response",
-      "dest": "/backend/api/response.js",
-      "methods": ["GET", "DELETE", "OPTIONS"]
+      "source": "/api/response",
+      "destination": "/backend/api/response.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/backend/api/index.js"
+      "source": "/(.*)",
+      "destination": "/backend/api/index.js"
     }
   ],
   "headers": [
