@@ -24,8 +24,25 @@ import { generateResponse } from '../services/geminiService.js';
 import { transcribeAudio } from '../services/whisperService.js';
 import { savePendingResponse, saveResponse, saveErrorResponse } from '../services/dbService.js';
 
+// Tell Vercel to give us raw body
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 // Max audio size: 2MB
 const MAX_AUDIO_SIZE = 2 * 1024 * 1024;
+
+// Helper to read raw body
+async function getRawBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on('data', (chunk) => chunks.push(chunk));
+    req.on('end', () => resolve(Buffer.concat(chunks)));
+    req.on('error', reject);
+  });
+}
 
 /**
  * Main API handler
@@ -55,7 +72,7 @@ export default async function handler(req, res) {
     }
 
     // Get binary audio data
-    const audioBuffer = req.body;
+    const audioBuffer = await getRawBody(req);
     
     if (!audioBuffer || audioBuffer.length === 0) {
       return res.status(400).json({ success: false, error: 'Audio data required' });
