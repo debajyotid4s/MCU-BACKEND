@@ -10,7 +10,19 @@ export async function generateResponse(text) {
   console.log('[Gemini] Processing:', text.substring(0, 50));
 
   const model = getModel();
-  const result = await model.generateContent(text);
+  
+  // Create prompt with strict constraints
+  const prompt = `User said: "${text}"
+
+IMPORTANT INSTRUCTIONS:
+- Respond ONLY in English language
+- Keep your response under 20 words maximum
+- Be concise and direct
+- No explanations, just answer the question or respond to the statement
+
+Your response:`;
+
+  const result = await model.generateContent(prompt);
   const response = result.response;
   let responseText = response.text();
 
